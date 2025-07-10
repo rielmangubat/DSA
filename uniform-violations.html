@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Uniform Violations | SAIS</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet"/>
+
+  <style>
+    body {
+      background-color: #f5f5f5;
+    }
+    .topbar {
+      background-color: #002b5c;
+      color: white;
+    }
+    .sidebar {
+      background-color: #cce0ff;
+      min-height: 100vh;
+    }
+    .sidebar a {
+      display: flex;
+      align-items: center;
+      color: #000;
+      text-decoration: none;
+      padding: 10px 15px;
+      margin-bottom: 5px;
+      border-radius: 8px;
+      transition: background-color 0.2s ease;
+    }
+    .sidebar a:hover {
+      background-color: #b3d4fc;
+      padding-left: 20px;
+    }
+    .sidebar a.active {
+      background-color: #99c2ff;
+      font-weight: bold;
+    }
+    .sidebar-icon {
+      font-size: 1.4rem;
+      margin-right: 0.7rem;
+    }
+    .logo-circle {
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+  </style>
+</head>
+<body>
+
+  <!-- Topbar -->
+  <div class="topbar d-flex justify-content-between align-items-center p-3 px-4">
+    <div class="d-flex align-items-center">
+      <img src="logo.png" alt="Logo" width="40" class="me-2 logo-circle">
+      <span class="fs-5 fw-semibold">SAIS</span>
+    </div>
+    <div class="d-flex align-items-center gap-4">
+      <span class="fw-semibold">Admin</span>
+      <i class="bi bi-person-circle fs-5"></i>
+      <i class="bi bi-box-arrow-right fs-5"></i>
+    </div>
+  </div>
+
+  <div class="d-flex">
+    <!-- Sidebar -->
+    <div class="sidebar col-md-2 p-4">
+      <a href="dashboard.html" class="text-dark">
+        <i class="bi bi-grid-fill sidebar-icon"></i> Dashboard
+      </a>
+      <a href="uniform-violations.html" class="active text-dark">
+        <i class="bi bi-person-x-fill sidebar-icon"></i> Uniform Violations
+      </a>
+      <a href="student-complaints.html" class="text-dark">
+        <i class="bi bi-chat-left-dots-fill sidebar-icon"></i> Student Complaints
+      </a>
+      <a href="reports.html" class="text-dark">
+        <i class="bi bi-bar-chart-fill sidebar-icon"></i> Reports
+      </a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="col-md-10 p-4">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h4 class="fw-semibold">Uniform Violations</h4>
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addViolationModal">
+          <i class="bi bi-plus-circle me-1"></i> Add Violation
+        </button>
+      </div>
+
+      <!-- Violations Table -->
+      <div class="table-responsive bg-white rounded shadow p-3">
+        <table class="table table-bordered text-center align-middle">
+          <thead class="table-primary">
+            <tr>
+              <th>#</th>
+              <th>Student Name</th>
+              <th>Violation</th>
+              <th>Date</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Juan Dela Cruz</td>
+              <td>No ID</td>
+              <td>July 8, 2025</td>
+              <td>
+                <button class="btn btn-sm btn-warning"><i class="bi bi-pencil"></i></button>
+                <button class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></button>
+              </td>
+            </tr>
+            <!-- Add more rows dynamically -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Violation Modal -->
+  <div class="modal fade" id="addViolationModal" tabindex="-1" aria-labelledby="addViolationModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <form class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addViolationModalLabel">Add Uniform Violation</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="studentName" class="form-label">Student Name</label>
+            <input type="text" class="form-control" id="studentName" required />
+          </div>
+          <div class="mb-3">
+            <label for="violation" class="form-label">Violation</label>
+            <input type="text" class="form-control" id="violation" required />
+          </div>
+          <div class="mb-3">
+            <label for="violationDate" class="form-label">Date</label>
+            <input type="date" class="form-control" id="violationDate" required />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
