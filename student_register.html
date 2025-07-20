@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Register</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', Arial, sans-serif;
+      background: linear-gradient(135deg, #f4f6f9 0%, #e9f0fb 100%);
+      position: relative;
+      min-height: 100vh;
+      color: #222;
+    }
+    .register-box {
+      max-width: 800px;
+      border-radius: 2rem;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+      overflow: hidden;
+      background: #fff;
+    }
+    .left-panel {
+      background: linear-gradient(135deg, #002b5c 0%, #0052cc 100%);
+      border-top-left-radius: 2rem;
+      border-bottom-left-radius: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100%;
+    }
+    .right-panel {
+      border-top-right-radius: 2rem;
+      border-bottom-right-radius: 2rem;
+      background: #fff;
+    }
+    .logo-circle {
+      border-radius: 50%;
+      object-fit: cover;
+      width: 120px;
+      height: 120px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    .back-button {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      z-index: 999;
+    }
+    .form-label {
+      font-weight: 600;
+      color: #002b5c;
+    }
+    .form-control {
+      border-radius: 2em;
+      font-size: 1.05em;
+      padding: 0.75em 1.2em;
+      border: 1px solid #e3e8f0;
+      background: #f8fafc;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .form-control:focus {
+      border-color: #007bff;
+      box-shadow: 0 0 0 2px #cce0ff;
+      background: #fff;
+    }
+    .input-group-text {
+      background: #f4f6f9;
+      border: 1px solid #e3e8f0;
+      border-radius: 2em;
+      cursor: pointer;
+    }
+    .btn, .dropdown-toggle {
+      border-radius: 2em !important;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    }
+    .btn-primary, .btn-register {
+      background: linear-gradient(90deg, #0052cc 0%, #007bff 100%);
+      border: none;
+      color: #fff;
+    }
+    .btn-primary:hover, .btn-register:hover {
+      background: linear-gradient(90deg, #007bff 0%, #0052cc 100%);
+      color: #fff;
+    }
+    .btn-light {
+      background: #f4f6f9;
+      color: #002b5c;
+      border: 1px solid #e3e8f0;
+    }
+    .btn-light:hover {
+      background: #e3e8f0;
+      color: #002b5c;
+    }
+    .form-check-label {
+      color: #555;
+    }
+    @media (max-width: 768px) {
+      .register-box {
+        border-radius: 1rem;
+      }
+      .left-panel, .right-panel {
+        border-radius: 0 !important;
+      }
+      .logo-circle {
+        width: 80px;
+        height: 80px;
+      }
+    }
+    @media (max-width: 576px) {
+      .register-box {
+        flex-direction: column !important;
+        min-width: 100vw;
+        border-radius: 0;
+      }
+      .left-panel, .right-panel {
+        border-radius: 0 !important;
+      }
+    }
+  </style>
+</head>
+<body class="d-flex justify-content-center align-items-center min-vh-100">
+  <!-- Back Button (Top Right) -->
+  <div class="back-button">
+    <a href="student_landing.html" class="btn btn-light shadow-sm">
+      <i class="bi bi-arrow-left-circle me-1"></i> Back
+    </a>
+  </div>
+  <!-- Register Box -->
+  <div class="container register-box d-flex flex-wrap p-0">
+    <!-- Left Panel -->
+    <div class="col-md-5 p-4 text-white left-panel">
+      <img src="logo.png" alt="Logo" class="mb-3 logo-circle" />
+      <hr class="border-white w-100 my-3" />
+      <p class="text-uppercase small mb-1">Join the system</p>
+      <h4 class="fw-bold fst-italic text-center">Student Affairs Information System</h4>
+    </div>
+    <!-- Right Panel -->
+    <div class="col-md-7 p-4 right-panel">
+    <form id="registerForm" method="POST" action="student_dashboard.html" onsubmit="return validateForm()">
+        <div class="mb-3">
+          <label for="student_id" class="form-label">Student ID</label>
+          <div class="input-group">
+            <span class="input-group-text">C</span>
+            <input type="text" id="student_id" name="student_id" class="form-control" required maxlength="10"
+              oninput="this.value = this.value.replace(/[^0-9]/g, '')" />
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="fullname" class="form-label">Full Name</label>
+          <input type="text" id="fullname" name="fullname" class="form-control" required />
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" id="email" name="email" class="form-control" required
+       pattern="^[a-zA-Z0-9._%+-]+@srcb\.edu\.ph$"
+       title="Please use your school email (example@srcb.edu.ph)" />
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <div class="input-group">
+            <input type="password" id="password" name="password" class="form-control" required />
+            <span class="input-group-text" id="togglePassword">
+              <i class="bi bi-eye" id="eyeIcon"></i>
+            </span>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="confirm_password" class="form-label">Confirm Password</label>
+          <div class="input-group">
+  <input type="password" id="confirm_password" name="confirm_password" class="form-control" required />
+  <span class="input-group-text" id="toggleConfirmPassword">
+    <i class="bi bi-eye" id="eyeIconConfirm"></i>
+  </span>
+</div>
+        </div>
+        <button type="submit" class="btn btn-register w-100">Register</button>
+        <p class="text-center mt-3 text-muted small">
+          Already have an account? <a href="student_login.html" class="text-primary text-decoration-none">Log In</a>
+        </p>
+      </form>
+    </div>
+  </div>
+  <script>
+  const togglePassword = document.getElementById("togglePassword");
+  const passwordInput = document.getElementById("password");
+  const eyeIcon = document.getElementById("eyeIcon");
+  const toggleConfirmPassword = document.getElementById("toggleConfirmPassword");
+  const confirmPasswordInput = document.getElementById("confirm_password");
+  const eyeIconConfirm = document.getElementById("eyeIconConfirm");
+  togglePassword.addEventListener("click", () => {
+    const type = passwordInput.type === "password" ? "text" : "password";
+    passwordInput.type = type;
+    eyeIcon.classList.toggle("bi-eye");
+    eyeIcon.classList.toggle("bi-eye-slash");
+  });
+  toggleConfirmPassword.addEventListener("click", () => {
+    const type = confirmPasswordInput.type === "password" ? "text" : "password";
+    confirmPasswordInput.type = type;
+    eyeIconConfirm.classList.toggle("bi-eye");
+    eyeIconConfirm.classList.toggle("bi-eye-slash");
+  });
+  // ✅ Validate both email and password match
+  function validateForm() {
+    const emailInput = document.getElementById("email");
+    const email = emailInput.value.trim();
+    const schoolEmailPattern = /^[a-zA-Z0-9._%+-]+@srcb\.edu\.ph$/;
+    if (!schoolEmailPattern.test(email)) {
+      alert("Please use your official school email address (e.g., yourname@srcb.edu.ph).");
+      emailInput.focus();
+      return false;
+    }
+    const password = document.getElementById("password").value;
+    const confirmPassword = document.getElementById("confirm_password").value;
+    if (password !== confirmPassword) {
+      alert("Passwords do not match. Please try again.");
+      document.getElementById("confirm_password").focus();
+      return false;
+    }
+    return true;
+  }
+</script>
+</body>
+</html>

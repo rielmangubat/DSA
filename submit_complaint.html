@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Submit Complaint | SICT</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+ <style>
+  body {
+    font-family: 'Inter', Arial, sans-serif;
+    background: linear-gradient(135deg, #f4f6f9 0%, #e9f0fb 100%);
+    padding-top: 80px;
+    padding-bottom: 120px;
+    color: #222;
+  }
+  .navbar-custom {
+    background: rgba(0, 43, 92, 0.95);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+    backdrop-filter: blur(6px);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1030;
+    border-bottom: 1px solid #e3e8f0;
+  }
+  .navbar-custom .nav-link, 
+  .navbar-custom .navbar-brand, 
+  .navbar-custom .text-white {
+    color: #fff;
+    transition: color 0.2s;
+  }
+  .navbar-custom .nav-link:hover {
+    color: #ffd700;
+  }
+  .logo-circle {
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+  .footer {
+    background: rgba(0, 43, 92, 0.95);
+    color: white;
+    padding: 18px 0 12px 0;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 1030;
+    border-top: 1px solid #e3e8f0;
+    font-size: 1rem;
+    letter-spacing: 0.01em;
+  }
+  .card {
+    border-radius: 1.5rem;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    border: none;
+    transition: box-shadow 0.2s;
+  }
+  .card:hover {
+    box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+  }
+  .card-header {
+    border-radius: 1.5rem 1.5rem 0 0;
+    font-weight: 600;
+    font-size: 1.1rem;
+    letter-spacing: 0.01em;
+  }
+  .form-label {
+    font-weight: 600;
+    color: #002b5c;
+  }
+  .form-control, .form-select {
+    border-radius: 2em;
+    font-size: 1.05em;
+    padding: 0.75em 1.2em;
+    border: 1px solid #e3e8f0;
+    background: #f8fafc;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .form-control:focus, .form-select:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 2px #cce0ff;
+    background: #fff;
+  }
+  .btn, .dropdown-toggle {
+    border-radius: 2em !important;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  }
+  .btn-primary {
+    background: linear-gradient(90deg, #0052cc 0%, #007bff 100%);
+    border: none;
+  }
+  .btn-primary:hover {
+    background: linear-gradient(90deg, #007bff 0%, #0052cc 100%);
+    color: #fff;
+  }
+  .btn-secondary {
+    background: #f4f6f9;
+    color: #002b5c;
+    border: 1px solid #e3e8f0;
+  }
+  .btn-secondary:hover {
+    background: #e3e8f0;
+    color: #002b5c;
+  }
+  @media (max-width: 768px) {
+    .footer {
+      font-size: 0.95rem;
+    }
+    .card {
+      border-radius: 1rem;
+    }
+  }
+  @media (max-width: 576px) {
+    .container {
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+    }
+    .card {
+      padding: 0.5rem;
+    }
+  }
+ </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-custom px-3">
+  <a class="navbar-brand d-flex align-items-center" href="student_dashboard.html">
+    <img src="logo.png" alt="Logo" width="40" class="me-2 logo-circle">
+    <strong>SICT</strong>
+  </a>
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item"><a class="nav-link" href="student_dashboard.html">Dashboard</a></li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+          File Report
+        </a>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="submit_complaint.html">Submit Complaint</a></li>
+          <li><a class="dropdown-item" href="report_incident.html">Report Incident</a></li>
+        </ul>
+      </li>
+      <li class="nav-item"><a class="nav-link" href="view_incidents.html">View Reports</a></li>
+    </ul>
+  </div>
+  <div class="dropdown ms-auto">
+    <a class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="bi bi-person-circle fs-4 me-2"></i>
+      <strong>Student Name</strong>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end">
+      <li><a class="dropdown-item" href="edit_profile.html"><i class="bi bi-gear me-2"></i> Settings</a></li>
+      <li><a class="dropdown-item" href="#"><i class="bi bi-question-circle me-2"></i> Help</a></li>
+      <li><hr class="dropdown-divider"></li>
+      <li><a class="dropdown-item text-danger" href="student_login.html"><i class="bi bi-box-arrow-right me-2"></i> Log out</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Form Section -->
+<div class="container py-5">
+  <div class="card shadow-sm">
+    <div class="card-header bg-primary text-white">
+      <h5 class="mb-0"><i class="bi bi-pencil-square me-2"></i> Submit Complaint</h5>
+    </div>
+    <div class="card-body">
+      <form>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="studentName" class="form-label">Name</label>
+            <input type="text" class="form-control" id="studentName" placeholder="e.g. Juan Dela Cruz" required>
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label for="program" class="form-label">Program</label>
+            <select class="form-select" id="program" required>
+              <option selected disabled>-- Select Program --</option>
+              <option value="IT">IT</option>
+              <option value="BSBA">BSBA</option>
+              <option value="HM">HM</option>
+              <option value="EDUC">EDUC</option>
+              <option value="CRIM">CRIM</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="yearLevel" class="form-label">Year Level</label>
+            <input type="text" class="form-control" id="yearLevel" placeholder="e.g. 2nd Year" required>
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label for="major" class="form-label">Major</label>
+            <input type="text" class="form-control" id="major" placeholder="e.g. Information Systems" required>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="complaintTitle" class="form-label">Complaint Title</label>
+          <input type="text" class="form-control" id="complaintTitle" placeholder="e.g. Bullying during break time" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="category" class="form-label">Category</label>
+          <select class="form-select" id="category" required>
+            <option selected disabled>-- Select Category --</option>
+            <option value="Bullying">Bullying</option>
+            <option value="Lost & Found">Lost & Found</option>
+            <option value="Harassment">Harassment</option>
+            <option value="Others">Others</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="description" class="form-label">Description</label>
+          <textarea class="form-control" id="description" rows="4" placeholder="Describe the complaint in detail..." required></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label for="dateIncident" class="form-label">Date of Incident</label>
+          <input type="date" class="form-control" id="dateIncident" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary"><i class="bi bi-send-fill me-1"></i> Submit</button>
+        <a href="student_dashboard.html" class="btn btn-secondary ms-2">Cancel</a>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer mt-auto">
+  <img src="logo.png" alt="Logo" width="60" class="me-2 logo-circle">
+  <span>© 2025 St. Rita's College of Balingasag — Incident & Complaints Tracker</span>
+</footer>
+
+</body>
+</html>

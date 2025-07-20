@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Dashboard | SICT</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: 'Inter', Arial, sans-serif;
+      background: linear-gradient(135deg, #f4f6f9 0%, #e9f0fb 100%);
+      color: #222;
+    }
+    .dashboard-wrapper {
+      display: flex;
+      flex-direction: row;
+    }
+    .logo-circle {
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    .sidebar {
+      background: rgba(0, 43, 92, 0.95);
+      color: #fff;
+      min-height: 100vh;
+      position: fixed;
+      z-index: 1040;
+      width: 270px;
+      top: 0;
+      left: 0;
+      bottom: 0;
+    }
+    .sidebar a {
+      color: #fff;
+      text-decoration: none;
+      display: block;
+      padding: 12px 16px;
+      margin: 8px 0;
+      border-radius: 2em;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      transition: background 0.2s, color 0.2s;
+    }
+    .sidebar a:hover, .sidebar a.active {
+      background: linear-gradient(90deg, #0052cc 0%, #007bff 100%);
+      color: #fff;
+    }
+    .main-content {
+      margin-left: 270px;
+      margin-bottom: 100px;
+      width: 100%;
+      padding: 2rem;
+    }
+    .footer {
+      background: rgba(0, 43, 92, 0.95);
+      color: white;
+      padding: 18px 0 12px 0;
+      text-align: center;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      border-top: 1px solid #e3e8f0;
+      font-size: 1rem;
+      letter-spacing: 0.01em;
+      z-index: 1050;
+    }
+    @media (max-width: 1200px) {
+      .dashboard-wrapper {
+        flex-direction: column;
+      }
+      .sidebar {
+        position: static;
+        width: 100%;
+        min-height: auto;
+        border-right: none;
+        border-bottom: 1px solid #e3e8f0;
+        box-shadow: none;
+      }
+      .main-content {
+        margin-left: 0;
+        padding: 1rem;
+      }
+    }
+    @media (max-width: 768px) {
+      .sidebar {
+        padding: 1rem 0.5rem;
+      }
+      .main-content {
+        padding: 1rem;
+      }
+    }
+    @media (max-width: 576px) {
+      .sidebar {
+        padding: 0.5rem 0.2rem;
+      }
+      .logo-section img {
+        width: 40px;
+      }
+      .main-content {
+        padding: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="dashboard-wrapper">
+  <!-- Sidebar -->
+  <?php include 'admin_sidebar.php'; ?>
+  <!-- Main Content -->
+  <main class="main-content">
+      <!-- Header Section -->
+      <div class="card rounded-4 shadow-sm mb-4 p-4 border-0">
+        <div class="d-flex justify-content-between align-items-center">
+          <div>
+            <h2 class="fw-bold mb-1">Welcome back, Admin!</h2>
+            <p class="mb-0 text-muted">Here's what's happening with your incident reports today</p>
+          </div>
+          <div class="d-flex align-items-center">
+            <span class="me-3 fw-bold">Administrator</span>
+            <div class="bg-light p-3 rounded-circle">
+              <i class="bi bi-person-fill-gear fs-4"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Metrics -->
+      <div class="row mb-4 g-4">
+        <div class="col-md-3">
+          <div class="card rounded-4 shadow-sm border-0 text-primary text-center p-4">
+            <i class="bi bi-flag-fill fs-2 mb-2"></i>
+            <div class="fs-3 fw-bold">12</div>
+            <div class="small">Total Incidents</div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card rounded-4 shadow-sm border-0 text-warning text-center p-4">
+            <i class="bi bi-megaphone-fill fs-2 mb-2"></i>
+            <div class="fs-3 fw-bold">8</div>
+            <div class="small">Total Complaints</div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card rounded-4 shadow-sm border-0 text-success text-center p-4">
+            <i class="bi bi-check-circle fs-2 mb-2"></i>
+            <div class="fs-3 fw-bold">7</div>
+            <div class="small">Resolved Cases</div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card rounded-4 shadow-sm border-0 text-danger text-center p-4">
+            <i class="bi bi-people-fill fs-2 mb-2"></i>
+            <div class="fs-3 fw-bold">150</div>
+            <div class="small">Registered Students</div>
+          </div>
+        </div>
+      </div>
+      <!-- Time Filter -->
+      <div class="card rounded-4 shadow-sm border-0 mb-4 p-4">
+        <h6 class="mb-3 fw-bold"><i class="bi bi-calendar-range me-2"></i>Filter by Time Period:</h6>
+        <div class="d-flex flex-wrap gap-2">
+          <button class="btn btn-outline-primary active" onclick="filterData('today')">Today</button>
+          <button class="btn btn-outline-primary" onclick="filterData('week')">This Week</button>
+          <button class="btn btn-outline-primary" onclick="filterData('month')">This Month</button>
+          <button class="btn btn-outline-primary" onclick="filterData('all')">All Time</button>
+        </div>
+      </div>
+      <!-- Bar Chart and Summary -->
+      <div class="row g-4 mb-4">
+        <div class="col-lg-8">
+          <div class="card rounded-4 shadow-sm border-0 p-4 h-100">
+            <div class="fw-bold mb-3"><i class="bi bi-graph-up-arrow me-2"></i>Violations & Complaints Analytics</div>
+            <div style="height:350px;"><canvas id="dashboardChart"></canvas></div>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="card rounded-4 shadow-sm border-0 p-4 h-100">
+            <div class="fw-bold mb-3"><i class="bi bi-info-circle me-2"></i>Summary</div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item bg-transparent border-0 ps-0"><strong>Incidents:</strong> <span id="incidentsCount">12</span> reported</li>
+              <li class="list-group-item bg-transparent border-0 ps-0"><strong>Complaints:</strong> <span id="complaintsCount">8</span> filed</li>
+              <li class="list-group-item bg-transparent border-0 ps-0"><strong>Resolved:</strong> <span id="resolvedCount">7</span> cases resolved</li>
+              <li class="list-group-item bg-transparent border-0 ps-0"><strong>Pending:</strong> <span id="pendingCount">13</span> pending cases</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- Recent Reports -->
+      <div class="card rounded-4 shadow-sm border-0 mb-4">
+        <div class="fw-bold p-4 border-bottom"><i class="bi bi-clock-history me-2"></i>Recent Incident Reports</div>
+        <div class="table-responsive">
+          <table class="table table-hover mb-0 align-middle">
+            <thead class="table-light">
+              <tr>
+                <th>Student</th>
+                <th>Incident</th>
+                <th>Status</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Juan Dela Cruz</strong></td>
+                <td>Cheating during exam</td>
+                <td><span class="badge rounded-pill bg-warning">Under Review</span></td>
+                <td>2025-07-15</td>
+              </tr>
+              <tr>
+                <td><strong>Maria Santos</strong></td>
+                <td>Disrespecting teacher</td>
+                <td><span class="badge rounded-pill bg-success">Resolved</span></td>
+                <td>2025-07-12</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!-- Action Buttons -->
+      <div class="d-flex flex-wrap gap-3 mb-5">
+        <a href="#" class="btn btn-primary"><i class="bi bi-plus-circle me-2"></i>Add Incident</a>
+        <a href="#" class="btn btn-warning"><i class="bi bi-pencil-square me-2"></i>Review Complaints</a>
+        <a href="#" class="btn btn-secondary"><i class="bi bi-person-lines-fill me-2"></i>Manage Students</a>
+      </div>
+    </main>
+  </div>
+</div>
+<!-- Footer -->
+<?php include 'admin_footer.php'; ?>
+<script>
+  let dashboardChart;
+  let currentFilter = 'all';
+  const dataByPeriod = {
+    today: { incidents: 2, complaints: 1, resolved: 1, pending: 2 },
+    week: { incidents: 8, complaints: 5, resolved: 4, pending: 9 },
+    month: { incidents: 12, complaints: 8, resolved: 7, pending: 13 },
+    all: { incidents: 12, complaints: 8, resolved: 7, pending: 13 }
+  };
+  function filterData(period) {
+    currentFilter = period;
+    document.querySelectorAll('.time-filter .btn').forEach(btn => {
+      btn.classList.remove('active');
+    });
+    event.target.classList.add('active');
+    const data = dataByPeriod[period];
+    document.getElementById('incidentsCount').textContent = data.incidents;
+    document.getElementById('complaintsCount').textContent = data.complaints;
+    document.getElementById('resolvedCount').textContent = data.resolved;
+    document.getElementById('pendingCount').textContent = data.pending;
+    updateChart(data);
+  }
+  function updateChart(data) {
+    if (dashboardChart) dashboardChart.destroy();
+    const ctx = document.getElementById('dashboardChart').getContext('2d');
+    dashboardChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Incidents', 'Complaints', 'Resolved', 'Pending'],
+        datasets: [{
+          label: 'Cases',
+          data: [data.incidents, data.complaints, data.resolved, data.pending],
+          backgroundColor: [
+            '#3498db', '#f39c12', '#27ae60', '#e74c3c'
+          ],
+          borderColor: [
+            '#2980b9', '#e67e22', '#2ecc71', '#c0392b'
+          ],
+          borderWidth: 1,
+          borderRadius: 4,
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          title: {
+            display: true,
+            text: `Violations & Complaints - ${currentFilter.charAt(0).toUpperCase() + currentFilter.slice(1)}`,
+            font: { size: 16, weight: 'bold' },
+            color: '#495057'
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: { stepSize: 1, font: { weight: 'bold' } },
+            grid: { color: 'rgba(0, 0, 0, 0.1)' }
+          },
+          x: {
+            ticks: { font: { weight: 'bold' } },
+            grid: { display: false }
+          }
+        }
+      }
+    });
+  }
+  updateChart(dataByPeriod.all);
+</script>
+</body>
+</html>
